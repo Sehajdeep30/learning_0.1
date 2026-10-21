@@ -184,22 +184,22 @@ The reason this matters: every later topic (LoRA, PCA, distillation, quantizatio
 
 | # | Topic | Can you... | Tier | Lvl |
 | --- | --- | --- | --- | --- |
-| E1 | Quantization basics (scale, zero-point, symmetric vs asymmetric, per-tensor/channel/group) | Quantize a tensor by hand and compute the error | ★ |  |
-| E2 | PTQ vs QAT | Explain the cost, data, and quality tradeoffs and the straight-through estimator | ★ |  |
-| E3 | Outliers in LLM activations | Explain why activation quantization is harder than weight quantization and what emergent outlier channels are | ★ |  |
-| E4 | GPTQ, AWQ, SmoothQuant ideas | Explain each in a few sentences: second-order error compensation, protecting salient weights, shifting difficulty from activations to weights | ★ |  |
-| E5 | Low-bit formats (INT8, INT4, FP8, NF4, ternary) | Say what each is good for and what hardware actually supports | ★ |  |
-| E6 | Weight-only vs weight-and-activation quantization | Predict which helps decode speed and which helps prefill | ★ |  |
-| E7 | KV-cache quantization and compression | Explain eviction, quantization, and sharing approaches and their quality risks on long context | ★ |  |
-| E8 | Structured sparsity (2:4, block) and what hardware exploits | Say which sparsity patterns turn into real speedups and which do not | ★ |  |
-| E9 | Speculative decoding | Explain draft-and-verify, why output distribution is preserved, and what determines the speedup (acceptance rate) | ★ |  |
-| E10 | Attention variants (sliding window, linear attention, state-space hybrids) | Explain the tradeoffs vs full attention and where quality is lost | ○ |  |
-| E11 | Mixture of Experts | Explain routing, load balancing, why MoE saves compute but not memory, and serving challenges | ★ |  |
-| E12 | Inference serving (continuous batching, PagedAttention, prefix caching) | Explain what each fixes and how utilization and latency interact | ★ |  |
-| E13 | Compression pipelines (combining distill + prune + quantize) | Explain why compressions interact, and why order matters | ★ |  |
-| E14 | On-device and edge constraints | Reason about memory, power, thermal, and operator support limits | ○ |  |
-| E15 | Cost and energy modeling | Convert tokens, FLOPs, and utilization into cost per million tokens and energy per request | ★ |  |
-| E16 | Compression evaluation | Say what a compressed model loses beyond headline accuracy (long context, rare skills, calibration, safety behavior) | ★ |  |
+| E1 | Quantization basics (scale, zero-point, symmetric vs asymmetric, per-tensor/channel/group) | Quantize a tensor by hand and compute the error | ★ | 1 |
+| E2 | PTQ vs QAT | Explain the cost, data, and quality tradeoffs and the straight-through estimator | ★ | 0 |
+| E3 | Outliers in LLM activations | Explain why activation quantization is harder than weight quantization and what emergent outlier channels are | ★ | 1 |
+| E4 | GPTQ, AWQ, SmoothQuant ideas | Explain each in a few sentences: second-order error compensation, protecting salient weights, shifting difficulty from activations to weights | ★ | 0 |
+| E5 | Low-bit formats (INT8, INT4, FP8, NF4, ternary) | Say what each is good for and what hardware actually supports | ★ | 1 |
+| E6 | Weight-only vs weight-and-activation quantization | Predict which helps decode speed and which helps prefill | ★ | 0 |
+| E7 | KV-cache quantization and compression | Explain eviction, quantization, and sharing approaches and their quality risks on long context | ★ | 0 |
+| E8 | Structured sparsity (2:4, block) and what hardware exploits | Say which sparsity patterns turn into real speedups and which do not | ★ | 3 |
+| E9 | Speculative decoding | Explain draft-and-verify, why output distribution is preserved, and what determines the speedup (acceptance rate) | ★ | 0 |
+| E10 | Attention variants (sliding window, linear attention, state-space hybrids) | Explain the tradeoffs vs full attention and where quality is lost | ○ | 0 |
+| E11 | Mixture of Experts | Explain routing, load balancing, why MoE saves compute but not memory, and serving challenges | ★ | 1 |
+| E12 | Inference serving (continuous batching, PagedAttention, prefix caching) | Explain what each fixes and how utilization and latency interact | ★ | 0 |
+| E13 | Compression pipelines (combining distill + prune + quantize) | Explain why compressions interact, and why order matters | ★ | 1 |
+| E14 | On-device and edge constraints | Reason about memory, power, thermal, and operator support limits | ○ | 0 |
+| E15 | Cost and energy modeling | Convert tokens, FLOPs, and utilization into cost per million tokens and energy per request | ★ | 0 |
+| E16 | Compression evaluation | Say what a compressed model loses beyond headline accuracy (long context, rare skills, calibration, safety behavior) | ★ | 1 |
 
 **Boss question:** given a new accelerator's FLOPs, bandwidth, and memory, and a quality target, which compression technique would you pick for a 13B model, and what would you predict before measuring?
 
@@ -209,22 +209,22 @@ The reason this matters: every later topic (LoRA, PCA, distillation, quantizatio
 
 | # | Topic | Can you... | Tier | Lvl |
 | --- | --- | --- | --- | --- |
-| F1 | Construct validity | Explain whether a benchmark measures what it claims, with a concrete example of a mismatch | ★ |  |
-| F2 | Benchmark saturation and contamination | Explain detection approaches (n-gram overlap, canary strings, perturbation) and their limits | ★ |  |
-| F3 | Variance sources (seeds, prompts, sampling, ordering of few-shot examples) | Quantify each source and explain why single-run comparisons are unreliable | ★ |  |
-| F4 | Statistical comparison of models | Do paired bootstrap or McNemar-style tests and report effect sizes with intervals | ★ |  |
-| F5 | Sample size and power for evals | Compute how many items you need to detect a 1-point difference | ★ |  |
-| F6 | Prompt and format sensitivity | Demonstrate that rephrasing changes rankings, and say how to design robust eval prompts | ★ |  |
-| F7 | LLM-as-judge | Explain position bias, verbosity bias, self-preference, and how to validate a judge against humans | ★ |  |
-| F8 | Human evaluation design | Design a rubric, pilot it, and handle rater training and drift | ★ |  |
-| F9 | Inter-annotator agreement | Compute and interpret Cohen's and Fleiss' kappa and Krippendorff's alpha, and say why raw agreement misleads | ★ |  |
-| F10 | Pairwise comparison and ranking (Elo, Bradley-Terry) | Explain how rankings are derived from preferences and their assumptions | ○ |  |
-| F11 | Calibration and selective prediction | Evaluate confidence quality and risk-coverage tradeoffs | ★ |  |
-| F12 | Failure-mode taxonomies and error analysis | Build a taxonomy from sampled failures, and measure how common each is | ★ |  |
-| F13 | Slice-based and robustness evaluation | Evaluate by subgroup and perturbation, and say why an average can hide a failure | ★ |  |
-| F14 | Metric gaming (Goodhart's law) | Give examples of optimizing a metric until it stops measuring the thing | ○ |  |
-| F15 | Reproducibility | List what must be logged to reproduce an eval result | ★ |  |
-| F16 | Task-specific metrics (BLEU/ROUGE limits, exact match, pass@k, win rate) | Say what each captures, and how pass@k is estimated without bias | ○ |  |
+| F1 | Construct validity | Explain whether a benchmark measures what it claims, with a concrete example of a mismatch | ★ | 1 |
+| F2 | Benchmark saturation and contamination | Explain detection approaches (n-gram overlap, canary strings, perturbation) and their limits | ★ | 0 |
+| F3 | Variance sources (seeds, prompts, sampling, ordering of few-shot examples) | Quantify each source and explain why single-run comparisons are unreliable | ★ | 2 |
+| F4 | Statistical comparison of models | Do paired bootstrap or McNemar-style tests and report effect sizes with intervals | ★ | 1 |
+| F5 | Sample size and power for evals | Compute how many items you need to detect a 1-point difference | ★ | 1 |
+| F6 | Prompt and format sensitivity | Demonstrate that rephrasing changes rankings, and say how to design robust eval prompts | ★ | 2 |
+| F7 | LLM-as-judge | Explain position bias, verbosity bias, self-preference, and how to validate a judge against humans | ★ | 2 |
+| F8 | Human evaluation design | Design a rubric, pilot it, and handle rater training and drift | ★ | 1 |
+| F9 | Inter-annotator agreement | Compute and interpret Cohen's and Fleiss' kappa and Krippendorff's alpha, and say why raw agreement misleads | ★ | 0 |
+| F10 | Pairwise comparison and ranking (Elo, Bradley-Terry) | Explain how rankings are derived from preferences and their assumptions | ○ | 0 |
+| F11 | Calibration and selective prediction | Evaluate confidence quality and risk-coverage tradeoffs | ★ | 0 |
+| F12 | Failure-mode taxonomies and error analysis | Build a taxonomy from sampled failures, and measure how common each is | ★ | 0 |
+| F13 | Slice-based and robustness evaluation | Evaluate by subgroup and perturbation, and say why an average can hide a failure | ★ | 0 |
+| F14 | Metric gaming (Goodhart's law) | Give examples of optimizing a metric until it stops measuring the thing | ○ | 1 |
+| F15 | Reproducibility | List what must be logged to reproduce an eval result | ★ | 0 |
+| F16 | Task-specific metrics (BLEU/ROUGE limits, exact match, pass@k, win rate) | Say what each captures, and how pass@k is estimated without bias | ○ | 0 |
 
 **Boss question:** pick a popular benchmark claim and show, with numbers, that it is more fragile than it looks (variance, contamination, prompt sensitivity, or construct mismatch).
 
@@ -234,18 +234,18 @@ The reason this matters: every later topic (LoRA, PCA, distillation, quantizatio
 
 | # | Topic | Can you... | Tier | Lvl |
 | --- | --- | --- | --- | --- |
-| G1 | Embedding space geometry (anisotropy, hubness, intrinsic dimension) | Explain what each is and how it distorts similarity and clustering | ★ |  |
-| G2 | Exact and near-duplicate detection (MinHash, LSH, embedding similarity) | Choose a method and tune thresholds, and say why dedup improves generalization and reduces memorization | ★ |  |
-| G3 | Coverage and diversity measures | Define and compute coverage of an embedding set, and say why diversity is hard to measure | ★ |  |
-| G4 | Data selection (quality filtering, influence, uncertainty, coreset) | Compare approaches and say what each assumes | ★ |  |
-| G5 | Data mixture optimization | Explain how domain proportions affect capability and how mixtures are searched for | ○ |  |
-| G6 | Curriculum and ordering effects | Explain what is known and what is contested | ○ |  |
-| G7 | Label noise (detection and learning with it) | Explain confident learning and noise-robust losses | ★ |  |
-| G8 | Synthetic data | Explain generation, filtering, and verification, and the risk of model collapse when models train on their own outputs | ★ |  |
-| G9 | Data scaling laws | Explain how loss changes with data quantity and quality, and why returns diminish | ○ |  |
-| G10 | Data contamination and privacy | Explain memorization, extraction risk, and deduplication's role | ○ |  |
-| G11 | Active learning | Explain uncertainty and diversity sampling and when it beats random labeling | ○ |  |
-| G12 | Annotation economics | Reason about cost, quality, and agreement tradeoffs when buying labels | ○ |  |
+| G1 | Embedding space geometry (anisotropy, hubness, intrinsic dimension) | Explain what each is and how it distorts similarity and clustering | ★ | 1 |
+| G2 | Exact and near-duplicate detection (MinHash, LSH, embedding similarity) | Choose a method and tune thresholds, and say why dedup improves generalization and reduces memorization | ★ | 1 |
+| G3 | Coverage and diversity measures | Define and compute coverage of an embedding set, and say why diversity is hard to measure | ★ | 2 |
+| G4 | Data selection (quality filtering, influence, uncertainty, coreset) | Compare approaches and say what each assumes | ★ | 0 |
+| G5 | Data mixture optimization | Explain how domain proportions affect capability and how mixtures are searched for | ○ | 1 |
+| G6 | Curriculum and ordering effects | Explain what is known and what is contested | ○ | 0 |
+| G7 | Label noise (detection and learning with it) | Explain confident learning and noise-robust losses | ★ | 2 |
+| G8 | Synthetic data | Explain generation, filtering, and verification, and the risk of model collapse when models train on their own outputs | ★ | 1 |
+| G9 | Data scaling laws | Explain how loss changes with data quantity and quality, and why returns diminish | ○ | 2 |
+| G10 | Data contamination and privacy | Explain memorization, extraction risk, and deduplication's role | ○ | 3 |
+| G11 | Active learning | Explain uncertainty and diversity sampling and when it beats random labeling | ○ | 1 |
+| G12 | Annotation economics | Reason about cost, quality, and agreement tradeoffs when buying labels | ○ | 2 |
 
 **Boss question:** show a curated subset that beats a larger random sample, and explain why in terms of coverage, redundancy, or noise.
 
@@ -255,17 +255,17 @@ The reason this matters: every later topic (LoRA, PCA, distillation, quantizatio
 
 | # | Topic | Can you... | Tier | Lvl |
 | --- | --- | --- | --- | --- |
-| H1 | Probing classifiers | Explain what a probe shows and the control-task caveat (a probe may learn the task, not read the model) | ◇ |  |
-| H2 | Superposition and polysemantic neurons | Explain why neurons mix features and why that motivates dictionary learning | ◇ |  |
-| H3 | Sparse autoencoders | Explain the objective, the sparsity tradeoff, dead features, and how to judge feature quality | ◇ |  |
-| H4 | Circuits and mechanistic analysis (activation patching, causal tracing, logit lens) | Explain what each intervention establishes causally | ◇ |  |
-| H5 | Attribution methods (saliency, integrated gradients, SHAP) | Explain what each claims and why they can disagree or mislead | ◇ |  |
-| H6 | Adversarial robustness | Explain adversarial examples, adversarial training, and the robustness-accuracy tradeoff | ◇ |  |
-| H7 | Out-of-distribution detection | Explain softmax-confidence baselines, density and distance-based methods, and their limits | ◇ |  |
-| H8 | Uncertainty (ensembles, MC dropout, conformal prediction) | Explain what coverage guarantee conformal prediction gives and its assumptions | ◇ |  |
-| H9 | Jailbreaks, prompt injection, and red teaming | Explain attack classes and how to measure defense honestly | ◇ |  |
-| H10 | Alignment concepts (reward hacking, sycophancy, goal misgeneralization) | Give a concrete example of each | ◇ |  |
-| H11 | Research methodology | Explain what makes an interpretability claim falsifiable and what baselines it needs | ◇ |  |
+| H1 | Probing classifiers | Explain what a probe shows and the control-task caveat (a probe may learn the task, not read the model) | ◇ | 0 |
+| H2 | Superposition and polysemantic neurons | Explain why neurons mix features and why that motivates dictionary learning | ◇ | 3 |
+| H3 | Sparse autoencoders | Explain the objective, the sparsity tradeoff, dead features, and how to judge feature quality | ◇ | 1 |
+| H4 | Circuits and mechanistic analysis (activation patching, causal tracing, logit lens) | Explain what each intervention establishes causally | ◇ | 0 |
+| H5 | Attribution methods (saliency, integrated gradients, SHAP) | Explain what each claims and why they can disagree or mislead | ◇ | 1 |
+| H6 | Adversarial robustness | Explain adversarial examples, adversarial training, and the robustness-accuracy tradeoff | ◇ | 0 |
+| H7 | Out-of-distribution detection | Explain softmax-confidence baselines, density and distance-based methods, and their limits | ◇ | 2 |
+| H8 | Uncertainty (ensembles, MC dropout, conformal prediction) | Explain what coverage guarantee conformal prediction gives and its assumptions | ◇ | 1 |
+| H9 | Jailbreaks, prompt injection, and red teaming | Explain attack classes and how to measure defense honestly | ◇ | 2 |
+| H10 | Alignment concepts (reward hacking, sycophancy, goal misgeneralization) | Give a concrete example of each | ◇ | 1 |
+| H11 | Research methodology | Explain what makes an interpretability claim falsifiable and what baselines it needs | ◇ | 0 |
 
 **Boss question:** train a tiny sparse autoencoder on a small model's activations. Which features look interpretable, which are dead, and how would you tell a real feature from a story you told yourself?
 
@@ -275,13 +275,13 @@ The reason this matters: every later topic (LoRA, PCA, distillation, quantizatio
 
 | # | Skill | Can you... | Tier | Lvl |
 | --- | --- | --- | --- | --- |
-| I1 | Reading papers critically | State claim, evidence, assumptions, and where it could break, in five sentences | ★ |  |
-| I2 | Reproducing a result | Reproduce a published number and explain the gap if you cannot | ★ |  |
-| I3 | Ablation and experiment design | Isolate one variable, control seeds, and say what each ablation rules out | ★ |  |
-| I4 | Back-of-envelope estimation | Estimate params, FLOPs, memory, and cost before running anything | ★ |  |
-| I5 | Writing up findings | Produce a one-page writeup with a clear claim and honest limitations | ★ |  |
-| I6 | Debugging training and inference | Triage a bad loss curve, NaNs, or a quality drop without guessing | ★ |  |
-| I7 | Explaining to different audiences | Explain a technique to a manager, a peer, and a researcher at different depths | ★ |  |
+| I1 | Reading papers critically | State claim, evidence, assumptions, and where it could break, in five sentences | ★ | 1 |
+| I2 | Reproducing a result | Reproduce a published number and explain the gap if you cannot | ★ | 0 |
+| I3 | Ablation and experiment design | Isolate one variable, control seeds, and say what each ablation rules out | ★ | 1 |
+| I4 | Back-of-envelope estimation | Estimate params, FLOPs, memory, and cost before running anything | ★ | 0 |
+| I5 | Writing up findings | Produce a one-page writeup with a clear claim and honest limitations | ★ | 0 |
+| I6 | Debugging training and inference | Triage a bad loss curve, NaNs, or a quality drop without guessing | ★ | 1 |
+| I7 | Explaining to different audiences | Explain a technique to a manager, a peer, and a researcher at different depths | ★ | 2 |
 
 ---
 
